@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/baseModel.php';
+require_once __DIR__ . '/basemodel.php';
 
 class Siswa extends BaseModel {
     private $nisn;
@@ -23,13 +23,16 @@ class Siswa extends BaseModel {
                 FROM siswa 
                 INNER JOIN kelas ON siswa.id_kelas = kelas.id_kelas";
         if (!empty($keyword)) {
-            $sql .= " WHERE siswa.nama LIKE :kw OR siswa.nisn LIKE :kw";
+            $sql .= " WHERE siswa.nama LIKE :kw1 OR siswa.nisn LIKE :kw2";
         }
         $sql .= " ORDER BY siswa.nama ASC";
 
         $stmt = $this->db->prepare($sql);
         if (!empty($keyword)) {
-            $stmt->execute([':kw' => "%$keyword%"]);
+            $stmt->execute([
+                ':kw1' => "%$keyword%",
+                ':kw2' => "%$keyword%"
+            ]);
         } else {
             $stmt->execute();
         }

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/baseModel.php';
+require_once __DIR__ . '/basemodel.php';
 
 class Presensi extends BaseModel {
     private $id;
@@ -41,8 +41,9 @@ class Presensi extends BaseModel {
             $params[':id_kelas'] = $id_kelas;
         }
         if (!empty($keyword)) {
-            $sql .= " AND (siswa.nama LIKE :kw OR siswa.nisn LIKE :kw)";
-            $params[':kw'] = "%$keyword%";
+            $sql .= " AND (siswa.nama LIKE :kw1 OR siswa.nisn LIKE :kw2)";
+            $params[':kw1'] = "%$keyword%";
+            $params[':kw2'] = "%$keyword%";
         }
 
         $sql .= " ORDER BY presensi.tanggal_waktu DESC";
