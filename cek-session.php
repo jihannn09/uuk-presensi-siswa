@@ -1,12 +1,11 @@
 <?php
-// pastikan session sudah aktif sebelum dicek
-if (session_status() == PHP_SESSION_NONE) {
+// Memulai session jika belum aktif
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Proteksi halaman: jika belum login (is_login tidak true), kembalikan ke index.php
 if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
-    header('Location: login.php');
+    header("Location: index.php");
     exit();
 }
-
-?>
